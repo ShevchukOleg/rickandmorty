@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-single-character',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SingleCharacterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
+  public curentCharacterId: string;
 
   ngOnInit() {
+    this.curentCharacterId = this.route.snapshot.paramMap.get('id');
+    console.log(this.curentCharacterId);
   }
 
 }
