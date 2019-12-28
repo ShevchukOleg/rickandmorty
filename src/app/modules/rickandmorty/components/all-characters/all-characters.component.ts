@@ -38,11 +38,17 @@ export class AllCharactersComponent implements OnInit, OnDestroy {
   /**
    * при старті компоненти здійснюється запит через сервіс на надання данних для відображення
    * формується колекція підписок на спостерігачі
+   * для уникнення втрати контексту відображення LocalStorage викор для кординації поточної сторінки пагінації
    * дані отриманні від сервісу перевіряються та розформатовуються на окремі складові
    * у випадку помилки данні виводяться в консоль
    */
   ngOnInit() {
     console.log('Init');
+    const prospectivePage = localStorage.getItem('pagination page');
+    if (!!prospectivePage) {
+      console.log('Сторінку отриманно з LS', prospectivePage);
+      this.setPageConfiguration(+prospectivePage, +localStorage.getItem('pages'));
+    }
     this.dataService.getCharactersPage(this.paginationSettings.curentPage);
     this.subscriptions.push(
       this.dataService.charactersPageObservableSubject.subscribe(
@@ -51,6 +57,8 @@ export class AllCharactersComponent implements OnInit, OnDestroy {
             this.characters = Object.assign(data.results);
             this.pageInfo = Object.assign(data.info);
             this.paginationSettings.pages = this.pageInfo.pages;
+            localStorage.setItem('pagination page', this.paginationSettings.curentPage.toString());
+            localStorage.setItem('pages', this.paginationSettings.pages.toString());
             console.log('Characters and pageInfo in component', data);
           } else {
             console.log('Starting stage in component:', data);
@@ -72,6 +80,25 @@ export class AllCharactersComponent implements OnInit, OnDestroy {
       }
     );
     this.subscriptions = [];
+  }
+
+  public setPageConfiguration(page: number, totalP: number) {
+    this.paginationSettings = {
+      curentPage: page,
+      interval: [],
+      pages: totalP
+    };
+
+    switch (true) {
+      case (page === totalP):
+        this.paginationSettings.interval = [page - 2, page - 1, page];
+        break;
+      case (page === 1):
+        this.paginationSettings.interval = [page, page + 1, page + 2];
+        break;
+      default:
+        this.paginationSettings.interval = [page - 1, page, page + 1];
+    }
   }
 
   /**

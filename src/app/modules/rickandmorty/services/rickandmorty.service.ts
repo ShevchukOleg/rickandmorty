@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ServerResponse } from '../interfaces/serverResponse.interface';
+import { SingleSharacter } from '../interfaces/singleSharacter.interface';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Observable, BehaviorSubject } from 'rxjs';
@@ -19,6 +20,9 @@ export class RickandmortyService {
   private charactersPageSource = new BehaviorSubject({});
   public charactersPageObservableSubject = this.charactersPageSource.asObservable();
 
+  private singleCharacterSource = new BehaviorSubject({});
+  public singleCharacterObservableSubject = this.singleCharacterSource.asObservable();
+
   constructor(
     private http: HttpClient
   ) { }
@@ -36,6 +40,23 @@ export class RickandmortyService {
           this.temporaryStorage.set(page, response);
           console.log(this.temporaryStorage);
           this.charactersPageSource.next(Object.assign(response));
+        },
+        (error) => console.error(error)
+      );
+    }
+  }
+
+  getCharacter(characterId: string) {
+    const pageNumber = 1 + Math.floor(+characterId / 20);
+    console.log(pageNumber);
+    if (this.temporaryStorage.has(pageNumber) ) {
+      const [curentCharacter] = this.temporaryStorage.get(pageNumber).results.filter( item => item.id === +characterId);
+      this.singleCharacterSource.next(curentCharacter);
+    } else {
+      this.http.get<SingleSharacter>(`${this.apiUrl}/character/${characterId}`).subscribe(
+        (response: SingleSharacter) => {
+          console.log(response);
+          this.singleCharacterSource.next(Object.assign(response));
         },
         (error) => console.error(error)
       );
