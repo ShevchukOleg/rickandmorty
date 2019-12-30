@@ -1,0 +1,20 @@
+header {
+  height: 90px;
+}
+
+ol, ul {
+  list-style-type: none;
+  margin: 0;
+}
+
+h2 {
+  font: {
+    family:'Courgette', cursive;
+    size: 36px;
+  }
+  color: #345396
+}
+
+.active {
+  font-weight: bold;
+}

@@ -24,9 +24,7 @@ export class SingleCharacterComponent implements OnInit {
 
   ngOnInit() {
     this.curentCharacterId = this.route.snapshot.paramMap.get('id');
-    console.log(this.curentCharacterId);
     this.dataService.getCharacter(this.curentCharacterId);
-
 
     this.subscriptions.push(
       this.dataService.singleCharacterObservableSubject.subscribe(
@@ -34,13 +32,11 @@ export class SingleCharacterComponent implements OnInit {
           if (!!data.id) {
             this.character = Object.assign(data);
           } else {
-            console.log('Starting stage in component:', data);
+            console.log('Starting info:', data);
           }
         },
         (error) => console.error(error)
       )
     );
-
-    console.log(this.character);
   }
 }

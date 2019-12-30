@@ -31,6 +31,17 @@ export class AllCharactersComponent implements OnInit, OnDestroy {
     pages: 3
   };
 
+  public sortingBy = 'none';
+
+  /**
+   * параметри для селекту керування фільтром
+   */
+  public sortingOptions = [
+    { value: 'none', viewValue: 'No' },
+    { value: 'up', viewValue: 'A-Z' },
+    { value: 'down', viewValue: 'Z-A' }
+  ];
+
   constructor(
     public dataService: RickandmortyService
   ) { }
@@ -46,7 +57,7 @@ export class AllCharactersComponent implements OnInit, OnDestroy {
     console.log('Init');
     const prospectivePage = localStorage.getItem('pagination page');
     if (!!prospectivePage) {
-      console.log('Сторінку отриманно з LS', prospectivePage);
+      console.log(`Сторінку №${prospectivePage} отриманно з LS`);
       this.setPageConfiguration(+prospectivePage, +localStorage.getItem('pages'));
     }
     this.dataService.getCharactersPage(this.paginationSettings.curentPage);
@@ -148,6 +159,11 @@ export class AllCharactersComponent implements OnInit, OnDestroy {
             }
         }
       }
+  }
+
+  public changeSortingOrder(order) {
+    console.log(order);
+    this.sortingBy = order;
   }
 
 }
