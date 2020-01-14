@@ -1,0 +1,134 @@
+.cart {
+  z-index: 100;
+  position: relative;
+  margin: 20px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px 1px rgba($color: #000000, $alpha: .45);
+  background: white;
+  padding: 5px;
+  .sticerWrapper {
+    z-index: 5;
+    position: absolute;
+    border: solid 1px rgb(255, 255, 255);
+    border-radius: 5px;
+    top: 0;
+    right: 0;
+    box-shadow: 0 1px 3px 1px rgb(121, 121, 121), inset 0 0 3px 1px rgb(121, 121, 121);
+  }
+  .sticer {
+    border-radius: 3px;
+    height: 18px;
+    width: 24px;
+    text-align: center;
+    line-height: 17px;
+    font: {
+      size: 12px;
+      family: "Arial";
+      weight: bold;
+    }
+    color: white;
+    background: linear-gradient(0deg, rgb(32, 135, 26) 0%, rgb(159, 239, 135) 100%);
+    box-shadow: inset 0 0 3px 1px rgba(62, 2, 2, 0.2);
+  }
+
+  .cartInner {
+    border: solid 2px #000000;
+    border-image: repeating-linear-gradient(135deg, #00000000 0.5%, #78b2d8 1%) 11;
+    box-shadow: inset 0 0 0 1px #78b2d8;
+    padding: 1px;
+    .cartContent {
+      width: 262px;
+      margin: 1px;
+      border: solid 2px #d4e9f6;
+
+      .cartInfo {
+        margin-top: 8px;
+        margin-left: 17px;
+        .cartHeader {
+          margin-bottom: 7px;
+          font: {
+            family: "Arial";
+            weight: bold;
+            size: 16px;
+          }
+        }
+        p.message {
+          margin-bottom: 0;
+          font: {
+            family: "Arial";
+            size: 12px;
+          }
+          line-height: 14px;
+          color: #808080;
+        }
+
+        p.salary {
+          margin-bottom: 0;
+          font: {
+            family: "Arial";
+            size: 12px;
+          }
+        }
+      }
+
+      .cartStatistic {
+        border: solid 1px #b4d9ef;
+        border-radius: 3px;
+        margin: 5px;
+        background: linear-gradient(to top, #effaff, white );
+        p {
+          margin: 7px 11px;
+          font: {
+            family: Arial;
+            size: 12px;
+            weight: bold;
+          }
+        }
+
+        .progressBar {
+          height: 23px;
+        }
+
+        .action {
+          display: flex;
+          justify-content: center;
+          margin: auto;
+
+          button {
+            width: 115px;
+            height: 27px;
+            border: solid 1px #0d1c5f;
+            border-radius: 5px;
+            box-shadow: inset 0 2px 2px -2px #78b2d8, inset 0 0 10px 1px rgba(56, 138, 62, 0.26);
+            background: linear-gradient(to top, #071b6f, #6b81df);
+            outline: none;
+            color: white;
+            font: {
+              family: "Arial";
+              size: 13px;
+            }
+          }
+          p {
+            color: #999999;
+            font: {
+              family: "Arial";
+              size: 11px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.shadow {
+  z-index: -1;
+  height: 11px;
+  width: 320px;
+  position: absolute;
+  bottom: 18px;
+  display: block;
+  content: '';
+  background: radial-gradient(ellipse at center, rgba(153,153,153,1) 0%,rgba(255,255,255,1) 72%);
+  box-shadow: none !important;
+}
