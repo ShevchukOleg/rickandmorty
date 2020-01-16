@@ -15,10 +15,16 @@
           </div>
           <div class="cartStatistic">
             <p>Месячный план выполнен на</p>
-            <div class="progressBar"></div>
+            <div class="progressBar">
+              <div class="progressWrapper">
+                <div class="scale" [ngStyle]="{'width.px': (2.28 * progressValue)}">
+                </div>
+                <span class="value">{{progressValue}}%</span>
+              </div>
+            </div>
             <div class="action">
-              <button>Продолжить</button>
-              <p>Осталось 8 дней</p>
+              <button (click)="runProgress()">Продолжить</button>
+              <p class="timeLeft">Осталось 8 дней</p>
             </div>
           </div>
         </div>
@@ -26,6 +32,5 @@
     </div>
     <div class="shadow">
     </div>
-
   </div>
 </div>

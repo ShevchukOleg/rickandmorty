@@ -24,6 +24,7 @@ export class AllCharactersComponent implements OnInit, OnDestroy {
   public pageInfo;
   /**
    * paginationSettings - об'єкт параметрів пагінації
+   * Я розумію що пагінація не працюватиме коректно якщо на сервері буде менше 3 торінок
    */
   public paginationSettings = {
     curentPage: 1,
@@ -54,12 +55,17 @@ export class AllCharactersComponent implements OnInit, OnDestroy {
    * у випадку помилки данні виводяться в консоль
    */
   ngOnInit() {
-    console.log('Init');
+    /**
+     * prospectivePage - данні про сторінкк на якій було припинуто перегляд списку
+     */
     const prospectivePage = localStorage.getItem('pagination page');
     if (!!prospectivePage) {
-      console.log(`Сторінку №${prospectivePage} отриманно з LS`);
+      console.log(`Page number: (${prospectivePage}) resived from Local storage`);
       this.setPageConfiguration(+prospectivePage, +localStorage.getItem('pages'));
     }
+    /**
+     * алгоритм запиту данний про потрібну сторінку переліку персонажів
+     */
     this.dataService.getCharactersPage(this.paginationSettings.curentPage);
     this.subscriptions.push(
       this.dataService.charactersPageObservableSubject.subscribe(
@@ -72,7 +78,7 @@ export class AllCharactersComponent implements OnInit, OnDestroy {
             localStorage.setItem('pages', this.paginationSettings.pages.toString());
             console.log('Characters and pageInfo in component', data);
           } else {
-            console.log('Starting stage in component:', data);
+            console.log('Data not yet received from server');
           }
         },
         (error) => console.error(error)
@@ -92,7 +98,12 @@ export class AllCharactersComponent implements OnInit, OnDestroy {
     );
     this.subscriptions = [];
   }
-
+  /**
+   * setPageConfiguration - задає параметри відображення пагінації згідно до данних
+   * сервера про кількість сторінок та положення перегляду списку
+   * @param page - поточна сторінка
+   * @param totalP - загальна кількість сторінок
+   */
   public setPageConfiguration(page: number, totalP: number) {
     this.paginationSettings = {
       curentPage: page,

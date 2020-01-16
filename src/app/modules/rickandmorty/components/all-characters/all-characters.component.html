@@ -6,13 +6,17 @@
           <li class="page-item" [ngClass]="{'disabled': (paginationSettings.curentPage == 1)}">
             <span class="page-link" data-action="prev" (click)="loadPage($event)">Previous</span>
           </li>
-          <li class="page-item" [ngClass]="{'active': (paginationSettings.curentPage === paginationSettings.interval[0])}">
+          <li class="page-item"
+            [ngClass]="{'active': (paginationSettings.curentPage === paginationSettings.interval[0])}">
             <span class="page-link" (click)="loadPage($event)">{{paginationSettings.interval[0]}}</span>
           </li>
-          <li class="page-item" [ngClass]="{'active': (paginationSettings.curentPage === paginationSettings.interval[1])}" aria-current="page">
+          <li class="page-item"
+            [ngClass]="{'active': (paginationSettings.curentPage === paginationSettings.interval[1])}"
+            aria-current="page">
             <span class="page-link" (click)="loadPage($event)">{{paginationSettings.interval[1]}}</span>
           </li>
-          <li class="page-item" [ngClass]="{'active': (paginationSettings.curentPage === paginationSettings.interval[2])}">
+          <li class="page-item"
+            [ngClass]="{'active': (paginationSettings.curentPage === paginationSettings.interval[2])}">
             <span class="page-link" (click)="loadPage($event)">{{paginationSettings.interval[2]}}</span>
           </li>
           <li class="page-item" [ngClass]="{'disabled': (paginationSettings.curentPage ==  paginationSettings.pages)}">
@@ -25,7 +29,7 @@
     <div class="row">
       <form class="mb-5">
         <div class="form-group">
-          <label >Sorting order:
+          <label>Sorting order:
             <select class="form-control" #sortingOrder (change)="changeSortingOrder(sortingOrder.value)">
               <option *ngFor="let option of sortingOptions" [value]="option.value">{{option.viewValue}}</option>
             </select>
@@ -43,7 +47,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr [routerLink]="['/rickandmorty/character', character.id]" class="crossing"  *ngFor="let character of (characters | sortByName: sortingBy)">
+          <tr [routerLink]="['/rickandmorty/character', character.id]" class="crossing"
+            *ngFor="let character of (characters | sortByName: sortingBy)">
             <th scope="row">{{character.id}}</th>
             <td>{{character.name}}</td>
             <td>{{character.status}}</td>
