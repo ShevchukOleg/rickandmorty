@@ -45,7 +45,7 @@ export class RickandmortyService {
     console.log('Service trying to find the page:', page);
     if (this.temporaryStorage.has(page)) {
       console.log('Service find page in Temporary storage of servise');
-      this.charactersPageSource.next(Object.assign(this.temporaryStorage.get(page)));
+      this.charactersPageSource.next(Object.assign({}, this.temporaryStorage.get(page)));
     } else {
       console.log('Service start asking server');
       const options = (page !== 0) ? { params: new HttpParams().append('page', page.toString()) } : {};
@@ -55,7 +55,7 @@ export class RickandmortyService {
           console.log('Server get response data:', response);
           this.temporaryStorage.set(page, response);
           console.log('Response has been saved in Temporary storage of servise',this.temporaryStorage);
-          this.charactersPageSource.next(Object.assign(response));
+          this.charactersPageSource.next(Object.assign({}, response));
         },
         (error) => console.error(error)
       );
@@ -76,7 +76,7 @@ export class RickandmortyService {
       this.http.get<SingleSharacter>(`${this.apiUrl}/character/${characterId}`).subscribe(
         (response: SingleSharacter) => {
           console.log(response);
-          this.singleCharacterSource.next(Object.assign(response));
+          this.singleCharacterSource.next(Object.assign({}, response));
         },
         (error) => console.error(error)
       );

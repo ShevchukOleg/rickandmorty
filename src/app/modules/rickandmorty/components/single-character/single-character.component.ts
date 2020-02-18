@@ -39,7 +39,7 @@ export class SingleCharacterComponent implements OnInit {
       this.dataService.singleCharacterObservableSubject.subscribe(
         (data: SingleSharacter) => {
           if (!!data.id) {
-            this.character = Object.assign(data);
+            this.character = Object.assign({}, data);
           } else {
             console.log('Starting info:', data);
           }
