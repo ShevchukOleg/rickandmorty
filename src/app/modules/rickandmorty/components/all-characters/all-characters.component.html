@@ -48,7 +48,7 @@
         </thead>
         <tbody>
           <tr [routerLink]="['/rickandmorty/character', character.id]" class="crossing"
-            *ngFor="let character of characters | sortByName: sortingBy">
+            *ngFor="let character of (characters | sortByName: sortingBy)">
             <th scope="row">{{character.id}}</th>
             <td>{{character.name}}</td>
             <td>{{character.status}}</td>

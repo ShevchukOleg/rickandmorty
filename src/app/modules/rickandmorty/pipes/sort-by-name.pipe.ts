@@ -7,7 +7,6 @@ import { SingleSharacter } from '../interfaces/singleSharacter.interface';
 export class SortByNamePipe implements PipeTransform {
 
   transform(items: Array<SingleSharacter>, order: string = 'none'): Array<SingleSharacter> {
-    console.log(order);
     switch (order) {
       case 'none':
         return items;

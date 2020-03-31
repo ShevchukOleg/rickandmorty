@@ -71,7 +71,7 @@ export class AllCharactersComponent implements OnInit, OnDestroy {
       this.dataService.charactersPageObservableSubject.subscribe(
         (data: ServerResponse) => {
           if (!!data.info) {
-            this.characters = Object.assign({}, data.results);
+            this.characters = Array.from(data.results);
             this.pageInfo = Object.assign({}, data.info);
             this.paginationSettings.pages = this.pageInfo.pages;
             localStorage.setItem('pagination page', this.paginationSettings.curentPage.toString());
