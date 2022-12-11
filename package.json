@@ -24,7 +24,7 @@
     "@angular/router": "~10.1.1",
     "bootstrap": "^4.5.2",
     "compression": "^1.7.4",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "jquery": "^3.5.1",
     "popper": "^1.0.1",
     "popper.js": "^1.16.1",
